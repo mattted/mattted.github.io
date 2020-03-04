@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Natural Earth Download CLI"
-date:       2020-03-04 22:50:59 +0000
+date:       2020-03-04 17:51:00 -0500
 permalink:  natural_earth_download_cli
 ---
 
