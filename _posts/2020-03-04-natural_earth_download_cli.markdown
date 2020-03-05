@@ -15,7 +15,7 @@ The NaturalEarthDownload gem is a command line interface to download files from 
 Since Natural Earth Data does not provide an API, all of the information needed to be scraped from the website using Nokogiri. I originally envisioned having a CLI class, Scraper class, File class, and Download Queue class; however, it quickly became apparent that I would need more classes in order to store information from the website as a user incrementally navigated through the CLI. Ultimately I ended up with the following classes:
 
 * CLI - controls the flow of the program, calling on the Scraper class as new parts of the website need to be scraped and calls methods for getting input / displaying output.
-* Scraper - scrapes the website and instantiates the appropriate instances of classes and their attributes. In order to keep from duplicating items, the scraper class only instantiates new classes when they don't already exist within the class's ::all method.
+* Scraper - scrapes the website and instantiates the appropriate instances of classes and their attributes. In order to keep from duplicating items, the scraper class only instantiates new classes when they don't already exist within the class's #all method.
 * DataTheme - the most generalized class. It holds all the data themes and scales
 * DataVector - stores the name and description of vector files. Has a DataTheme.
 * DataRasterCat - stores the name and description of raster categories. Has a DataTheme.
