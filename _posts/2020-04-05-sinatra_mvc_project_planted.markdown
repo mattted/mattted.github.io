@@ -18,6 +18,7 @@ Other general functionality:
 * Delete plants and all associated logs/tracking information records.
 
 
+
 ### Difficulties
 
 One of the issues I had when coding this project was maintaining what felt like proper RESTful routing conventions. In the early stages without many routes, it felt pretty clear cut and I probably didn't give it quite enough thought. Once I was towards the end of the project with numerous routes, many with overlapping themes/content, I had a little more trouble maintaining seemingly sensible routes without some requests accidentally getting improperly routed. It's certainly something I will be more cognizant of when working on a project like this again.
