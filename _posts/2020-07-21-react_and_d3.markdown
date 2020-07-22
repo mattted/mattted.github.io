@@ -1,26 +1,26 @@
 ---
 layout: post
 title:      "React and D3"
-date:       2020-07-22 03:19:16 +0000
+date:       2020-07-21 23:19:16 -0400
 permalink:  react_and_d3
 ---
 
 As a big fan of the D3.js library, I decided I wanted to utilize it as a main component of both the Javascript and React projects. While incorporating it into the Javascript project was straightforward, utilizing D3 and React together while still getting the full benefits of both was a bit more difficult. Since both D3 and React want control over the DOM and have their own methods/techniques for creating, updating, and removing DOM elements, I found it a bit cumbersome to get them working together. While researching the best ways to incorporate D3 into a React project, I found that there isn't really a definite consensus on how to best utilize them together. The following are my thoughts on a couple different methods I experimented with along the way.
 
-##### D3 to Calculate and Create
+### D3 to Calculate and Create
 Using this approach, React is used to create the main structure of the page, but ultimately pass an SVG/Div to D3 in which it can manage how to create, update, and delete the elements of the visualization.
  * Create a SVG/Div in the render method of a React component that has a Ref (provides a way to access the DOM node) 
  * Create a function that uses the normal D3 enter, update, exit pattern to create a visualization utilizing the React Ref as it's DOM node.
  * Call the above function within the ComponentDidMount and ComponentDidUpdate lifecycles methods of the React component so the D3 visualization changes on state/prop change
 This was the most straightforward approach as it uses the typical D3 pattern for creating visualizations. Animations and interactivity worked as expected since D3 is managing how the DOM elements of the visualization are created/updated/destroyed. However, it almost seemed to be a bit of an antipattern to turn so much control over the DOM to another library while using React.
  
-##### D3 to Calculate, React to Create
+### D3 to Calculate, React to Create
 Instead of passing a DOM node Ref to D3 and using it to create the DOM elements, it can be used only for the calculation of visual elements. Using this approach, React creates DOM elements with the visual attributes calculated by D3 (x, y, path, d, width, height, projection, geoPath, etc...)
  * Calculate visual properties of elements using data from state/props and the d3 library.
  * Create visualization elements by looping data, creating DOM elements using D3 calculated attributes, and render using the standard render method of a React component.
 Typical D3 animations and interactivity don't work using this approach since React has control of rendering the visualization.
 
-##### Combination of Both
+### Combination of Both
 Ultimately I settled on an approach that used a bit of both of the above approaches. Like the first approach, I created a ref node using React that can be passed to D3; however, like the second approach, I used React to create all the DOM elements for the visualization, just without giving the elements any attributes other than a key. D3 could then select all of the created elements, apply the visual/data attributes, and supply animations/interactivity. This way, D3 isn't creating/destroying elements, only providing visual information. One of the components I used this approach for was a chloropleth map of the counties of the United States that showed total observations of various species of organisms. Using this approach, the process was...
  * Create an ```<svg>``` container that had a React ref within the React component render method
  * Create empty (aside from a key) ```<path>``` elements for all ~3000 counties and place them within the above ```<svg>``` element in the render() method.
